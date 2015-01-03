@@ -1,0 +1,9 @@
+{{alguien.data.nombre}}
+<p>Upload de imagenes</p>
+<form action="">
+    <input type="file" file-model="imagen">
+    <button type="button" ng-click="enviar()">Enviar</button>
+</form>
+<span ng-if="img">
+    <img src="{{imagen.url}}" alt="">
+</span>
