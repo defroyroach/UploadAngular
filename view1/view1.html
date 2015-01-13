@@ -1,9 +1,9 @@
-{{alguien.data.nombre}}
+{{vista.alguien.data.nombre}}
 <p>Upload de imagenes</p>
 <form action="">
-    <input type="file" file-model="imagen">
-    <button type="button" ng-click="enviar()">Enviar</button>
+    <input type="file" file-model="vista.imagen">
+    <button type="button" ng-click="vista.enviar()">Enviar</button>
 </form>
-<span ng-if="img">
-    <img src="{{imagen.url}}" alt="">
+<span ng-if="vista.img">
+    <img src="{{vista.imagen.url}}" alt="">
 </span>

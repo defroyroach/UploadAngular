@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('myApp.vista', ['ngRoute'])
-
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'view1/view1.html',
-    controller: 'VistaCtrl'
-  });
+    controller: 'VistaCtrl',
+    controllerAs:'vista'
+  })
 }])
 
 //Detecta el cambio en el input y lo asigna al model...
@@ -26,9 +26,14 @@ angular.module('myApp.vista', ['ngRoute'])
         }
     };
 }])
+.controller('VistaCtrl', VistaCtrl);
 
-.controller('VistaCtrl', ['$scope', '$http', function($scope, $http) {
-    $scope.img=false;
+
+VistaCtrl.$inject=['$scope', '$http'];
+
+function VistaCtrl($scope, $http) {
+    var vm = this;
+    vm.img=false;
     //Probando los estados http
         function a(){
             return $http({
@@ -37,16 +42,16 @@ angular.module('myApp.vista', ['ngRoute'])
                 })
         };
 
-        $scope.b=a().then(function (alguien) {
-            $scope.alguien=alguien;
+        vm.b=a().then(function (alguien) {
+            vm.alguien=alguien;
         });
 
 //Click en enviar
-    $scope.enviar=function() {
+    vm.enviar=function() {
+        console.log("Entro aca");
 
         //Asignamos el file-model a la variable file, gracias a la directiva de mas arriba.
-        var file = $scope.imagen;
-        console.log($scope.imagen);
+        var file = vm.imagen;
 
         var fd = new FormData();
         fd.append('file', file); //Agregamos data al "formulario" que vamos a enviar
@@ -57,12 +62,11 @@ angular.module('myApp.vista', ['ngRoute'])
             })
             .success(function(response){
                 //Guardamos la url de la imagen y hacemos que la muestre.
-                $scope.imagen=response;
-                $scope.img=true;
+                vm.imagen=response;
+                vm.img=true;
             })
             .error(function(response){
 
         });
         };
-
-}]);
+    };
