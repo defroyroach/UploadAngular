@@ -9,7 +9,9 @@ function VistaCtrl($scope, $http, view1Services) {
 
     //Probando los estados http
         function activate(){
-            vm.alguien=view1Services.get();
+            view1Services.get().then(function(response){
+                vm.alguien=response;
+            });
         };
 
 //Click en enviar

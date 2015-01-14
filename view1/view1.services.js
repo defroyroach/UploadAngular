@@ -15,7 +15,7 @@ function view1Services($http){
             .catch(getFailed);
 
         function getComplete(response) {
-            return response.data.results;
+            return response.data;
         }
 
         function getFailed(error) {
