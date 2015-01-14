@@ -9,9 +9,14 @@ angular.module('myApp.vista', ['ngRoute'])
   })
 }])
 
-//Detecta el cambio en el input y lo asigna al model...
-//Tal como lo explica aca: http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
-.directive('fileModel', ['$parse', function ($parse) {
+.directive('fileModel', fileModel)
+
+.controller('VistaCtrl', VistaCtrl);
+
+fileModel.$inject=['$parse']
+function fileModel ($parse) {
+    //Detecta el cambio en el input y lo asigna al model...
+    //Tal como lo explica aca: http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -25,12 +30,9 @@ angular.module('myApp.vista', ['ngRoute'])
             });
         }
     };
-}])
-.controller('VistaCtrl', VistaCtrl);
-
+}
 
 VistaCtrl.$inject=['$scope', '$http'];
-
 function VistaCtrl($scope, $http) {
     var vm = this;
     vm.img=false;
@@ -48,8 +50,6 @@ function VistaCtrl($scope, $http) {
 
 //Click en enviar
     vm.enviar=function() {
-        console.log("Entro aca");
-
         //Asignamos el file-model a la variable file, gracias a la directiva de mas arriba.
         var file = vm.imagen;
 
